@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"strings"
@@ -28,6 +29,10 @@ func cmdHookAction(_ Env, args []string) (err error) {
 		target = args[1]
 	}
 
+	fs := flag.NewFlagSet("hook", flag.ContinueOnError)
+	customCmd := fs.String("cmd", "", "Custom command to run as a hook")
+	fs.Parse(args[2:])
+
 	selfPath, err := os.Executable()
 	if err != nil {
 		return err
@@ -42,7 +47,12 @@ func cmdHookAction(_ Env, args []string) (err error) {
 		return fmt.Errorf("unknown target shell '%s'", target)
 	}
 
-	hookStr, err := shell.Hook()
+	hookStr := ""
+	if *customCmd != "" {
+		hookStr, err = shell.CustomHook(*customCmd)
+	} else {
+		hookStr, err = shell.Hook()
+	}
 	if err != nil {
 		return err
 	}

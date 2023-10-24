@@ -14,6 +14,10 @@ func (sh gha) Hook() (string, error) {
 	return "", fmt.Errorf("Hook not implemented for GitHub Actions shell")
 }
 
+func (sh gha) CustomHook(cmd string) (string, error) {
+	return "", fmt.Errorf("Hook not implemented for GitHub Actions shell")
+}
+
 func (sh gha) Export(e ShellExport) string {
 	var b strings.Builder
 	for key, value := range e {

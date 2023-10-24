@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 )
@@ -12,6 +13,10 @@ var Tcsh Shell = tcsh{}
 
 func (sh tcsh) Hook() (string, error) {
 	return "alias precmd 'eval `{{.SelfPath}} export tcsh`'", nil
+}
+
+func (sh tcsh) CustomHook(cmd string) (string, error) {
+	return "", errors.New("this feature is not supported")
 }
 
 func (sh tcsh) Export(e ShellExport) (out string) {

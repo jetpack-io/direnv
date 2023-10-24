@@ -1,5 +1,7 @@
 package cmd
 
+import "strings"
+
 // ZSH is a singleton instance of ZSH_T
 type zsh struct{}
 
@@ -24,6 +26,10 @@ fi
 
 func (sh zsh) Hook() (string, error) {
 	return zshHook, nil
+}
+
+func (sh zsh) CustomHook(cmd string) (string, error) {
+	return strings.ReplaceAll(zshHook, `"{{.SelfPath}}" export zsh`, cmd), nil
 }
 
 func (sh zsh) Export(e ShellExport) (out string) {

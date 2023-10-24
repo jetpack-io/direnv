@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 )
@@ -38,6 +39,10 @@ const fishHook = `
 
 func (sh fish) Hook() (string, error) {
 	return fishHook, nil
+}
+
+func (sh fish) CustomHook(cmd string) (string, error) {
+	return "", errors.New("this feature is not supported")
 }
 
 func (sh fish) Export(e ShellExport) (out string) {

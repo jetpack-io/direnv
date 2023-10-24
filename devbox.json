@@ -1,0 +1,13 @@
+{
+  "packages": [
+    "go@latest",
+    "runx:golangci/golangci-lint@latest"
+  ],
+  "shell": {
+    "scripts": {
+      "build": "go build -o dist/direnv main.go",
+      "lint": "golangci-lint run",
+      "test": "go test ./..."
+    }
+  }
+}

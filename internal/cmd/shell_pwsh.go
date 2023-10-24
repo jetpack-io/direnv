@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"regexp"
 )
@@ -33,6 +34,10 @@ else {
 
 `
 	return hook, nil
+}
+
+func (sh pwsh) CustomHook(cmd string) (string, error) {
+	return "", errors.New("this feature is not supported")
 }
 
 func (sh pwsh) Export(e ShellExport) (out string) {

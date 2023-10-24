@@ -3,6 +3,7 @@ package cmd
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 )
 
 type elvish struct{}
@@ -30,6 +31,10 @@ set @edit:before-readline = $@edit:before-readline {
 	}
 }
 `, nil
+}
+
+func (sh elvish) CustomHook(cmd string) (string, error) {
+	return "", errors.New("this feature is not supported")
 }
 
 func (sh elvish) Export(e ShellExport) string {

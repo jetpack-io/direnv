@@ -1,6 +1,9 @@
 package cmd
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type bash struct{}
 
@@ -22,6 +25,10 @@ fi
 
 func (sh bash) Hook() (string, error) {
 	return bashHook, nil
+}
+
+func (sh bash) CustomHook(cmd string) (string, error) {
+	return "", errors.New("this feature is not supported")
 }
 
 func (sh bash) Export(e ShellExport) (out string) {
@@ -58,7 +65,7 @@ func (sh bash) escape(str string) string {
  * Escaping
  */
 
-//nolint
+// nolint
 const (
 	ACK           = 6
 	TAB           = 9

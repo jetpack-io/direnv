@@ -10,6 +10,9 @@ type Shell interface {
 	// setups direnv as a prompt hook.
 	Hook() (string, error)
 
+	// Custom hook sets up a custom hook for the shell
+	CustomHook(cmd string) (string, error)
+
 	// Export outputs the ShellExport as an evaluatable string on the host shell
 	Export(e ShellExport) string
 

@@ -15,6 +15,10 @@ func (s gzenvShell) Hook() (string, error) {
 	return "", errors.New("the gzenv shell doesn't support hooking")
 }
 
+func (sh gzenvShell) CustomHook(cmd string) (string, error) {
+	return "", errors.New("the gzenv shell doesn't support hooking")
+}
+
 func (s gzenvShell) Export(e ShellExport) string {
 	return gzenv.Marshal(e)
 }
